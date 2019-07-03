@@ -8,7 +8,9 @@
     <div class="container">
 
         <div class="row">
-            @include('pages.agents.agents-block');
+            <div class="col-md-3 col-sm-6">
+                @include('pages.agents.agents-block');
+            </div>
         </div>
 
         @include('partials.pagination');

@@ -11,7 +11,9 @@
                 <div class="row">
                     @if(count($posts) > 1)
                         @foreach($posts as $post)
-                            @include('pages.blog.blog-block', ['post' => $post])
+                            <div class="col-md-6 col-sm-6">
+                                @include('pages.blog.blog-block', ['post' => $post])
+                            </div>
                         @endforeach
                     @else
                         <p>Well this sucks</p>
