@@ -194,114 +194,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="agent-carousel" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/1.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Martin Guptil</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/2.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Jesica Mile</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/3.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Thomas Jons</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/4.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Cris Jordan</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/5.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Marri Guptil</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
-                    <div class="at-agent-col">
-                        <div class="at-agent-img">
-                            <img src="images/agents/6.png" alt="">
-                            <div class="at-agent-social">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                                <div class="at-agent-call">
-                                    <p>+101 4326 0055</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-agent-info">
-                            <h4><a href="agents-details.html">Martin Mozina</a></h4>
-                            <p>sales executive</p>
-                        </div>
-                    </div>
+                    @include('pages.agents.agents-block');
                 </div>
             </div>
         </div>
@@ -324,65 +217,15 @@
             </div>
         </div>
         <div class="row animatedParent animateOnce">
-            <div class="col-md-4 col-sm-6">
-                <div class="at-blog-box at-col-default-mar animated fadeInUpShort slow">
-                    <div class="at-blog-img">
-                        <img src="images/blog/1.jpg" alt="">
-                        <div class="at-blog-date">
-                            <ul>
-                                <li><i class="icofont icofont-businessman"></i><a href="#">Mark Jonson</a>
-                                </li>
-                                <li><i class="icofont icofont-calendar"></i><a href="#">June 28, 2017</a>
-                                </li>
-                            </ul>
+                @if(count($posts) > 1)
+                    @foreach($posts as $post)
+                        <div class="col-md-4 col-sm-6">
+                            @include('pages.blog.blog-block', ['post' => $post])
                         </div>
-                    </div>
-                    <div class="at-blog-content">
-                        <h4><a href="blog-details.html">latest design of house</a></h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                        <a href="blog-details.html">Read More <i class="zmdi zmdi-long-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="at-blog-box at-col-default-mar animated fadeInUpShort slow delay-250">
-                    <div class="at-blog-img">
-                        <img src="images/blog/2.jpg" alt="">
-                        <div class="at-blog-date">
-                            <ul>
-                                <li><i class="icofont icofont-businessman"></i><a href="#">Thomas Roy</a>
-                                </li>
-                                <li><i class="icofont icofont-calendar"></i><a href="#">June 29, 2017</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="at-blog-content">
-                        <h4><a href="blog-details.html">strong house project</a></h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                        <a href="blog-details.html">Read More <i class="zmdi zmdi-long-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="at-blog-box at-col-default-mar animated fadeInUpShort slow delay-500">
-                    <div class="at-blog-img">
-                        <img src="images/blog/3.jpg" alt="">
-                        <div class="at-blog-date">
-                            <ul>
-                                <li><i class="icofont icofont-businessman"></i><a href="#">Nelson Monika</a>
-                                </li>
-                                <li><i class="icofont icofont-calendar"></i><a href="#">June 30, 2017</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="at-blog-content">
-                        <h4><a href="blog-details.html">popular design of house</a></h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                        <a href="blog-details.html">Read More <i class="zmdi zmdi-long-arrow-right"></i></a>
-                    </div>
-                </div>
+                    @endforeach
+                @else
+                    <p>Well this sucks</p>
+                @endif
             </div>
         </div>
     </div>
