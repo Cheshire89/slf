@@ -1,11 +1,22 @@
 <!-- Inner page heading start from here -->
-<section id="at-inner-title-sec">
+<section id="at-inner-title-sec"
+@if(isset($property['MainImage']))
+style="background-image: url({{ $property['MainImage'] }});"
+@endif
+>
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="at-inner-title-box">
                     <h2>{{ $title }}</h2>
-                    <p><a href="index-one.html">Home</a> <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="#">Services</a>
+
+                    <p>
+                        @if(isset($subTitle))
+                            {{ $subTitle }}
+                        @endif
+                        {{-- <a href="index-one.html">Home</a>
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        <a href="#">Services</a> --}}
                     </p>
                 </div>
             </div>
