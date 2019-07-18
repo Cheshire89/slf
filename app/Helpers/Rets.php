@@ -9,7 +9,7 @@ use \App\Helpers\Common;
 
 class Rets {
     public static $instance;
-    public static $query = array('Limit' => 10, 'Count' => 0, 'Format' => 'COMPACT-DECODED');
+    private static $query = array('Limit' => 10, 'Count' => 0, 'Format' => 'COMPACT-DECODED');
 
     function __construct() {
     }
@@ -85,17 +85,24 @@ class Rets {
 
     public static function getPropertyDetail($mls){
         $rets = self::instance();
-        $searchResults = $rets->Search('Property', 'RESI', '(MLSNumber=|'.$mls.')', self::$query);
+        $searchResults = $rets->Search('Property', 'RESI', '(MLSNumber='.$mls.')', self::$query);
         $searchResults = self::parseSearchResults($rets, $searchResults);
         $rets->Disconnect();
         return $searchResults;
     }
 
-
-
     private static function parseSearchResults($rets, $searchResults){
         foreach($searchResults as $property){
             $property['CompleteAddress'] = self::concatCompleteAddress($property);
+            $property['MainTitle'] = $property['BuildingName'] ? $property['BuildingName'] : $property['PropertyType'];
+
+            $property['SqftTotal'] = number_format($property['SqftTotal']);
+            $property['ListPrice'] = number_format($property['ListPrice']);
+            $property['TaxAmount'] = number_format($property['TaxAmount']);
+
+            $property['BathsTotal'] = round($property['BathsTotal']);
+            $property['Neighborhood'] = ucwords($property['Neighborhood']);
+
             $result = $rets->GetObject('Property', 'Photo', $property['MLSNumber'], '*', 0);
             $object = $result->first();
             if(!$object->getError()) {
@@ -108,11 +115,13 @@ class Rets {
 
     private static function concatCompleteAddress($property){
         $fullAddress = '';
-        $fullAddress .= $property->get('StreetBuildingNumber') .' '.
-                        $property->get('StreetNumber') .' '.
+        $fullAddress .= $property->get('StreetNumber') .' '.
                         $property->get('StreetDirPrefix') .' '.
-                        $property->get('StreetName') .' '.
-                        $property->get('StreetSuffix') .' '.
+                        $property->get('StreetName') .' ';
+        if ($property['StreetDirPrefix']) {
+            $fullAddress .= $property->get('StreetDirPrefix').' ';
+        }
+        $fullAddress .= $property->get('StreetSuffix') .' '.
                         $property->get('City') .', '.
                         $property->get('StateOrProvince') .' '.
                         $property->get('PostalCode');
