@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use \App\Helpers\Rets;
+use App\Post;
 
 class PagesController extends Controller
 {
@@ -12,7 +13,8 @@ class PagesController extends Controller
 
         $data = array(
             'title' => 'Home',
-            'properties' => Rets::propertySearch('RESI', 6)
+            'properties' => Rets::propertySearch('RESI', 6),
+            'posts' => Post::orderBy('created_at', 'desc')->get()
         );
         return view('pages.index')->with($data);
     }
@@ -53,8 +55,11 @@ class PagesController extends Controller
     }
 
     public function property($mls) {
-        Rets::getPropertyDetail($mls);
-        return view('pages.properties.property-detail');
+        $propertyDetail = Rets::getPropertyDetail($mls);
+        $data = array(
+            'property' => $propertyDetail[0]
+        );
+        return view('pages.properties.property-detail')->with($data);
     }
 
     public function signUp() {
