@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('partials.inner-heading', ['title' => 'Property'])
+@include('partials.inner-heading', ['title' => $property['MainTitle'], 'subTitle' => $property['CompleteAddress'], 'bgImg'=>['MainImage']])
 
 <!-- Property start from here -->
 <section class="at-property-sec at-property-right-sidebar">
@@ -13,10 +13,11 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="../images/slider/slider-1.jpg" alt="">
-                                <div class="carousel-caption">
-                                    <h2>NEW SUPERB VILLA</h2>
-                                </div>
+                                @if($property['MainImage'])
+                                    <img src="{{ $property['MainImage'] }}" alt="">
+                                @else
+                                    <img src="images/property/no_image.jpg" alt="">
+                                @endif
                             </div>
                             <!-- End Item -->
                             <div class="item">
@@ -34,7 +35,7 @@
                             </div>
                             <!-- End Item -->
                             <div class="item">
-                                <img src="../images/slider/slider-4.jpg" alt="">
+                                <img src="../images/sl ider/slider-4.jpg" alt="">
                                 <div class="carousel-caption">
                                     <h2>awesome bedroom</h2>
                                 </div>
@@ -62,53 +63,81 @@
                         </ul>
                     </div>
                     <!-- End Carousel -->
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
+                    <p>{{ $property['PublicRemarks'] }}</p>
                     <div class="at-sec-title at-sec-title-left">
                         <h2>Property <span>Features</span></h2>
                         <div class="at-heading-under-line">
                             <div class="at-heading-inside-line"></div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum totam et dolores voluptatem porro tempore temporibus ducimus</p>
+                        @if(isset($property['ExteriorFeatures']))
+                            <div class="property-detail">
+                                <div class="property-detail__features-header">Exterior Features</div>
+                                <div class="property-detail__features-text">
+                                    <p>{{ $property['ExteriorFeatures'] }}</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($property['InteriorFeatures']))
+                            <div class="property-detail">
+                                <div class="property-detail__features-header">Interior Features</div>
+                                <div class="property-detail__features-text">
+                                    <p>{{ $property['InteriorFeatures'] }}</p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="row at-property-features">
-                        <div class="col-md-6 clearfix">
-                            <ul>
-                                <li>Property ID : <span class="pull-right">AB-010234</span>
-                                </li>
-                                <li>Full Area : <span class="pull-right">520 sqft</span>
-                                </li>
-                                <li>Bedrooms : <span class="pull-right">6</span>
-                                </li>
-                                <li>Bathrooms : <span class="pull-right">3</span>
-                                </li>
-                                <li>Garages : <span class="pull-right">1</span>
-                                </li>
-                                <li>swimming pool : <span class="pull-right">Yes</span>
-                                </li>
-                                <li>Party Rooms : <span class="pull-right">Yes</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul>
-                                <li>Status : <span class="pull-right"> for Sale</span>
-                                </li>
-                                <li>Kitchen : <span class="pull-right">2</span>
-                                </li>
-                                <li>AC Rooms: <span class="pull-right">4</span>
-                                </li>
-                                <li>Internet : <span class="pull-right">Yes</span>
-                                </li>
-                                <li>Cable TV : <span class="pull-right">Yes</span>
-                                </li>
-                                <li>Balcony : <span class="pull-right">Yes</span>
-                                </li>
-                                <li>Pool : <span class="pull-right">Yes</span>
-                                </li>
-                            </ul>
+                        <div class="col-xs-12">
+                            <div class="row no-gutters">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>Listing ID : <span class="pull-right"> {{ $property['MLSNumber'] }}</span>
+                                        </li>
+                                        <li>Listing Style : <span class="pull-right"> {{ $property['StructuralStyle'] }}</span>
+                                        </li>
+                                        <li>House Size : <span class="pull-right">{{ $property['SqftTotal'] }} sqft</span>
+                                        </li>
+                                        <li>Bedrooms : <span class="pull-right">{{ $property['BedsTotal'] }}</span>
+                                        </li>
+                                        <li>Bathrooms : <span class="pull-right">{{ $property['BathsTotal'] }}</span>
+                                        </li>
+                                        <li>Garage Spaces : <span class="pull-right">{{ $property['TotalGarageSpaces'] }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>Status : <span class="pull-right">{{ $property['TransactionType'] }}</span>
+                                        </li>
+                                        <li>State, City : <span class="pull-right">{{ $property['StateOrProvince'] }}, {{$property['City']}}</span>
+                                        </li>
+                                        <li>Neighborhood : <span class="pull-right">{{ $property['Neighborhood'] }}</span>
+                                        </li>
+                                        <li>Year Built: <span class="pull-right">{{ $property['YearBuilt'] }}</span>
+                                        </li>
+                                        <li>Zoning : <span class="pull-right">{{ $property['Zoning'] }}</span>
+                                        </li>
+                                        <li>Virtual Tour :
+                                            <span class="pull-right">
+                                                <a class="btn btn-default at-btn-default" style="height: auto; padding: 2px 30px;" href="{{ $property['VirtualTourURLUnbranded'] }}" target="_blank">
+                                                    View
+                                                </a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-12">
+                                    <ul>
+                                        <li>Taxes : <span class="pull-right">${{ $property['TaxAmount'] }}</span>
+                                        </li>
+                                        <li>Price : <span class="pull-right">${{ $property['ListPrice'] }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <div class="at-comment-row">
                                 <h3><a href="#">Comment(3)</a></h3>
@@ -123,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- <div class="row">
                         <div class="at-form-area">
                             <div class="col-md-12">
