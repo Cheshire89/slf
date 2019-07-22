@@ -35583,7 +35583,10 @@ option {
   background: #F2F2F2;
   background: url(/images/2.jpg?b4359c42adc69653546965ab7852ed94);
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  min-height: 450px;
+  height: auto;
+  background-repeat: no-repeat;
 }
 
 #at-inner-title-sec .at-inner-title-box {
@@ -35645,19 +35648,19 @@ option {
   position: relative;
 }
 
-.at-single-testimonial .at-test-person {
+.at-testimonial-sec .at-single-testimonial .at-test-person {
   position: absolute;
   left: 30px;
   top: -40px;
 }
 
-.at-single-testimonial .at-test-person img {
+.at-testimonial-sec .at-single-testimonial .at-test-person img {
   width: 80px;
   height: 80px;
   border: 3px solid #F2F2F2;
 }
 
-.at-single-testimonial i {
+.at-testimonial-sec .at-single-testimonial i {
   position: absolute;
   right: 20px;
   bottom: 0;
@@ -35665,7 +35668,7 @@ option {
   opacity: 0.1;
 }
 
-.at-single-testimonial p {
+.at-testimonial-sec .at-single-testimonial p {
   z-index: 99;
 }
 
@@ -36300,5 +36303,16 @@ option {
   .at-about-col .at-about-title h1 {
     font-size: 24px;
   }
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row.no-gutters > [class^=col-],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
 }
 
