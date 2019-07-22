@@ -13,8 +13,8 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
-
-Route::get('/property/{mlsId}', ['as' => 'property.mls', 'uses' => 'PagesController@property']);
+Route::get('/properties', 'PagesController@properties');
+Route::get('/property/{mlsId}', ['uses' => 'PagesController@property']);
 
 Route::get('/agents', 'PagesController@agents');
 Route::get('/services', 'PagesController@services');
