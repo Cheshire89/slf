@@ -21,20 +21,8 @@
                                 </li>
                                 <li><a href="/about">About</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="properties-col-3.html">Properties 3 columns</a>
-                                        </li>
-                                        <li><a href="properties-col-4.html">Properties 4 columns</a>
-                                        </li>
-                                        <li><a href="properties-right-sidebar.html">Properties right sidebar</a>
-                                        </li>
-                                        <li><a href="properties-left-sidebar.html">Properties left sidebar</a>
-                                        </li>
-                                        <li><a href="properties-details.html">Properties details</a>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <a href="/properties">Properties</a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agents <i class="fa fa-angle-down" aria-hidden="true"></i></a>
