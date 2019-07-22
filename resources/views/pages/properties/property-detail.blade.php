@@ -253,8 +253,4 @@
 </section>
 <!-- Property End -->
 
-@include('partials.newsletter')
-
-@include('partials.brand')
-
 @endsection
