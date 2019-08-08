@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+use \App\Helpers\Rets;
+use App\Property;
 
-class PostsController extends Controller
+class PropertiesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
-        return view('pages.blog.index')->with('posts', $posts);
+        $data = array(
+            'properties' => Property::all()
+        );
+        return view('pages.properties.index')->with($data);
     }
 
     /**
@@ -25,7 +30,12 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $model = new Property();
+        $results = Rets::fetchUpdates();
+        foreach($results->toArray() as $property){
+            $subset = array_unique(Arr::only($property, $model->getFillable()));
+            Property::updateOrCreate($subset);
+        }
     }
 
     /**
@@ -47,8 +57,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        return view('pages.blog.blog-detail')->with('post', $post);
+        //
     }
 
     /**

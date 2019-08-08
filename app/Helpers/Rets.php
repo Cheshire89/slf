@@ -17,11 +17,10 @@ class Rets {
     public static function instance() {
         if (!isset(self::$instance)) {
             $config = new Configuration;
-            $config -> setLoginUrl('http://metro.matrixstaging.com/rets/Login.ashx')
+            $config->setLoginUrl('http://metro.matrixstaging.com/rets/Login.ashx')
                     ->setUsername(env('RETS_USERNAME'))
                     ->setPassword(env('RETS_PASSWORD'))
                     ->setRetsVersion('1.8');
-
             $rets = new Session($config);
             $rets->Login();
             self::$instance = $rets;
@@ -48,20 +47,21 @@ class Rets {
         $userLocationData = Common::getUserGeoData();
         $searchStr = '(Status=|A)';
 
-        if($city === null && isset($userLocationData['city'])) {
-            // $city = self::getShortValue('City', $userLocationData['city']);
-            $city = self::getShortValue('City', 'Denver');
-            $searchStr .= ',(City=|'.$city.')';
-        } else {
-            $searchStr .= ',(City=|'.$city.')';
-        }
-
-        // if($state === null && isset($userLocationData['city'])) {
-        //     $state = $userLocationData['state'];
-        //     $searchStr .= ',(StateOrProvince=|'.$state.')';
+        // if($city === null && isset($userLocationData['city'])) {
+        //     // $city = self::getShortValue('City', $userLocationData['city']);
+        //     $city = self::getShortValue('City', 'Denver');
+        //     $searchStr .= ',(City='.$city.')';
         // } else {
-        //     $searchStr .= ',(StateOrProvince=|'.$state.')';
+        //     $city = self::getShortValue('City', $city);
+        //     $searchStr .= ',(City='.$city.')';
         // }
+
+        if($state === null && isset($userLocationData['city'])) {
+            $state = 'CO';
+            $searchStr .= ',(StateOrProvince=|'.$state.')';
+        } else {
+            $searchStr .= ',(StateOrProvince=|'.$state.')';
+        }
 
         // if($zip === null && isset($userLocationData['zip'])){
         //     $zip = $userLocationData['zip'];
@@ -71,7 +71,7 @@ class Rets {
         // }
 
         //For Sale Prperties only
-        $searchStr .= ',(TransactionType=|FS)';
+        $searchStr .= ',(TransactionType=FS)';
 
         $query = self::$query;
         $query["Limit"] = $limit;
@@ -79,6 +79,14 @@ class Rets {
         $searchResults = $rets->Search('Property', $propertyType, $searchStr, $query);
         $searchResults = self::parseSearchResults($rets, $searchResults);
 
+        $rets->Disconnect();
+        return $searchResults;
+    }
+
+    public static function fetchUpdates(){
+        $rets = self::instance();
+        $searchStr = '(Status=A),(StateOrProvince=CO),(TransactionType=FS)';
+        $searchResults = $rets->Search('Property', 'RESI', $searchStr, self::$query);
         $rets->Disconnect();
         return $searchResults;
     }

@@ -13,8 +13,11 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
-Route::get('/properties', 'PagesController@properties');
-Route::get('/property/{mlsId}', ['uses' => 'PagesController@property']);
+
+// Route::get('/properties', 'PagesController@properties');
+// Route::get('/property/{mlsId}', ['uses' => 'PagesController@property']);
+
+
 
 Route::get('/agents', 'PagesController@agents');
 Route::get('/services', 'PagesController@services');
@@ -22,6 +25,8 @@ Route::get('/testimonials', 'PagesController@testimonials');
 Route::get('/contact', 'PagesController@contact');
 Route::get('/sign-up', 'PagesController@signUp');
 Route::get('/faq', 'PagesController@faq');
+
+Route::resource('properties', 'PropertiesController');
 // Route::get('/test', function(){
 //     dd();
 // });

@@ -1,4 +1,5 @@
-<div class="at-property-item at-col-default-mar animated fadeInUpShort slow">
+{{-- fadeInUpShort --}}
+<div class="at-property-item at-col-default-mar animated slow">
     <div class="at-property-img">
         @if($property['MainImage'])
             <img src="{{ $property['MainImage'] }}" alt="">

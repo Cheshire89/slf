@@ -10,9 +10,11 @@
 <section class="at-property-sec">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                @include('pages.properties.property-block')
-            </div>
+            @foreach($properties as $property)
+                <div class="col-md-3 col-sm-6">
+                    @include('pages.properties.property-block', ['property' => $property])
+                </div>
+            @endforeach
         </div>
 
         @include('partials.pagination')

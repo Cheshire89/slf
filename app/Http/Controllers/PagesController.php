@@ -54,10 +54,6 @@ class PagesController extends Controller
         return view('pages.contact')->with($data);
     }
 
-    public function properties() {
-        return view('pages.properties.index');
-    }
-
     public function property($mls) {
         $propertyDetail = Rets::getPropertyDetail($mls);
         $data = array(
