@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Arr;
-use \App\Helpers\Rets;
+use App\Helpers\Rets;
 use App\Property;
+
 
 class PropertiesController extends Controller
 {
@@ -18,7 +20,7 @@ class PropertiesController extends Controller
     public function index()
     {
         $data = array(
-            'properties' => Property::all()
+            'properties' => Rets::parseSearchResults(Property::all())
         );
         return view('pages.properties.index')->with($data);
     }
@@ -30,12 +32,7 @@ class PropertiesController extends Controller
      */
     public function create()
     {
-        $model = new Property();
-        $results = Rets::fetchUpdates();
-        foreach($results->toArray() as $property){
-            $subset = array_unique(Arr::only($property, $model->getFillable()));
-            Property::updateOrCreate($subset);
-        }
+
     }
 
     /**

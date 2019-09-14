@@ -10,7 +10,6 @@ use App\Post;
 class PagesController extends Controller
 {
     public function index() {
-
         $data = array(
             'title' => 'Home',
             'properties' => Rets::propertySearch('RESI', 6),

@@ -4,12 +4,12 @@ namespace App\Helpers;
 
 use PHRETS\Configuration;
 use PHRETS\Session;
-
 use \App\Helpers\Common;
+use Illuminate\Support\Facades\Log;
 
 class Rets {
     public static $instance;
-    private static $query = array('Limit' => 10, 'Count' => 0, 'Format' => 'COMPACT-DECODED');
+    private static $query = array('Limit' => 1000, 'Count' => 0, 'Format' => 'COMPACT-DECODED');
 
     function __construct() {
     }
@@ -83,9 +83,13 @@ class Rets {
         return $searchResults;
     }
 
-    public static function fetchUpdates(){
-        $rets = self::instance();
+    public static function fetchUpdates($updatesDate = null){
         $searchStr = '(Status=A),(StateOrProvince=CO),(TransactionType=FS)';
+        if($updatesDate) {
+            $lastUpdate = date("Y-m-d", strtotime($updatesDate));
+            $searchStr .= ',(MatrixModifiedDT='.$lastUpdate.'-'.date('Y-m-d').')';
+        }
+        $rets = self::instance();
         $searchResults = $rets->Search('Property', 'RESI', $searchStr, self::$query);
         $rets->Disconnect();
         return $searchResults;
@@ -99,7 +103,7 @@ class Rets {
         return $searchResults;
     }
 
-    private static function parseSearchResults($rets, $searchResults){
+    public static function parseSearchResults($searchResults){
         foreach($searchResults as $property){
             $property['CompleteAddress'] = self::concatCompleteAddress($property);
             $property['MainTitle'] = $property['BuildingName'] ? $property['BuildingName'] : $property['PropertyType'];
@@ -110,29 +114,22 @@ class Rets {
 
             $property['BathsTotal'] = round($property['BathsTotal']);
             $property['Neighborhood'] = ucwords($property['Neighborhood']);
-
-            $result = $rets->GetObject('Property', 'Photo', $property['MLSNumber'], '*', 0);
-            $object = $result->first();
-            if(!$object->getError()) {
-                $data = $object->getContent();
-                $property['MainImage'] = 'data:'.$object->getContentType().';base64,'.base64_encode($data);
-            }
         }
         return $searchResults;
     }
 
     private static function concatCompleteAddress($property){
         $fullAddress = '';
-        $fullAddress .= $property->get('StreetNumber') .' '.
-                        $property->get('StreetDirPrefix') .' '.
-                        $property->get('StreetName') .' ';
+        $fullAddress .= $property["StreetNumber"] .' '.
+                        $property["StreetDirPrefix"] .' '.
+                        $property["StreetName"] .' ';
         if ($property['StreetDirPrefix']) {
-            $fullAddress .= $property->get('StreetDirPrefix').' ';
+            $fullAddress .= $property["StreetDirPrefix"].' ';
         }
-        $fullAddress .= $property->get('StreetSuffix') .' '.
-                        $property->get('City') .', '.
-                        $property->get('StateOrProvince') .' '.
-                        $property->get('PostalCode');
+        $fullAddress .= $property["StreetSuffix"] .' '.
+                        $property["City"] .', '.
+                        $property["StateOrProvince"] .' '.
+                        $property["PostalCode"];
 
         return trim($fullAddress);
     }
