@@ -19,8 +19,8 @@ class CreatePropertiesTable extends Migration
             $table->float('BedsTotal');
             $table->string('City');
             $table->decimal('ListPrice', 10, 2);
-            $table->integer('MLSNumber');
             $table->integer('Matrix_Unique_ID')->primary();
+            $table->integer('MLSNumber');
             $table->string('Neighborhood');
             $table->string('PostalCode');
             $table->float('SqftTotal');
@@ -32,6 +32,18 @@ class CreatePropertiesTable extends Migration
             $table->float('TaxAmount');
             $table->string('TransactionType');
             $table->integer('YearBuilt');
+
+
+            $table->text('StructuralStyle');
+            $table->float('TotalGarageSpaces');
+            $table->text('Zoning');
+            $table->text('VirtualTourURLUnbranded');
+            $table->text('BuildingName');
+            $table->text('PropertyType');
+            $table->text('MiddleOrJuniorSchool');
+            $table->text('HighSchool');
+            $table->longText('ExteriorFeatures');
+            $table->longText('InteriorFeatures');
 
             $table->timestamps();
         });

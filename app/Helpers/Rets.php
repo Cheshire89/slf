@@ -89,6 +89,9 @@ class Rets {
             $lastUpdate = date("Y-m-d", strtotime($updatesDate));
             $searchStr .= ',(MatrixModifiedDT='.$lastUpdate.'-'.date('Y-m-d').')';
         }
+        if(!$updatesDate){
+            self::$query["Limit"] = 10000;
+        }
         $rets = self::instance();
         $searchResults = $rets->Search('Property', 'RESI', $searchStr, self::$query);
         $rets->Disconnect();
@@ -97,7 +100,7 @@ class Rets {
 
     public static function getPropertyDetail($mls){
         $rets = self::instance();
-        $searchResults = $rets->Search('Property', 'RESI', '(MLSNumber='.$mls.')', self::$query);
+        $searchResults = $rets->Search('Property', 'RESI', '(Matrix_Unique_ID='.$mls.')', self::$query);
         $searchResults = self::parseSearchResults($rets, $searchResults);
         $rets->Disconnect();
         return $searchResults;
@@ -105,17 +108,22 @@ class Rets {
 
     public static function parseSearchResults($searchResults){
         foreach($searchResults as $property){
-            $property['CompleteAddress'] = self::concatCompleteAddress($property);
-            $property['MainTitle'] = $property['BuildingName'] ? $property['BuildingName'] : $property['PropertyType'];
-
-            $property['SqftTotal'] = number_format($property['SqftTotal']);
-            $property['ListPrice'] = number_format($property['ListPrice']);
-            $property['TaxAmount'] = number_format($property['TaxAmount']);
-
-            $property['BathsTotal'] = round($property['BathsTotal']);
-            $property['Neighborhood'] = ucwords($property['Neighborhood']);
+            $propterty = self::parseSearchResult($property);
         }
         return $searchResults;
+    }
+
+    public static function parseSearchResult($property){
+        $property['CompleteAddress'] = self::concatCompleteAddress($property);
+        $property['MainTitle'] = $property['BuildingName'] ? $property['BuildingName'] : $property['PropertyType'];
+
+        $property['SqftTotal'] = number_format($property['SqftTotal']);
+        $property['ListPrice'] = number_format($property['ListPrice']);
+        $property['TaxAmount'] = number_format($property['TaxAmount']);
+
+        $property['BathsTotal'] = round($property['BathsTotal']);
+        $property['Neighborhood'] = ucwords($property['Neighborhood']);
+        return $property;
     }
 
     private static function concatCompleteAddress($property){

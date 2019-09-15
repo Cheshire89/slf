@@ -17,10 +17,10 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
+        $results = Property::latest()->paginate(20);
         $data = array(
-            'properties' => Rets::parseSearchResults(Property::all())
+            'properties' => Rets::parseSearchResults($results)
         );
         return view('pages.properties.index')->with($data);
     }
@@ -54,7 +54,11 @@ class PropertiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = Property::find($id);
+        $data = array(
+            'property' => Rets::parseSearchResult($result)
+        );
+        return view('pages.properties.property-detail')->with($data);
     }
 
     /**

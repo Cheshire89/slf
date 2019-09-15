@@ -1,4 +1,3 @@
-{{-- fadeInUpShort --}}
 <div class="at-property-item at-col-default-mar animated slow">
     <div class="at-property-img">
         @if($property['MainImage'])
@@ -7,7 +6,7 @@
             <img src="images/property/no_image.jpg" alt="">
         @endif
         <div class="at-property-overlayer"></div>
-    <a class="btn btn-default at-property-btn" href="/property/{{ $property['MLSNumber'] }}" role="button">View Details</a>
+    <a class="btn btn-default at-property-btn" href="/properties/{{ $property['Matrix_Unique_ID'] }}" role="button">View Details</a>
         <h4>{{ $property['TransactionType'] }}</h4>
     <h5>${{ $property['ListPrice'] }}</h5>
     </div>

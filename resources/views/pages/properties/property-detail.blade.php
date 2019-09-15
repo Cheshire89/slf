@@ -7,7 +7,7 @@
 <section class="at-property-sec at-property-right-sidebar">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-xs-12">
                 <div class="at-property-details-col">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
@@ -62,36 +62,23 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="at-property-details-col">
                     <!-- End Carousel -->
-                    <p>{{ $property['PublicRemarks'] }}</p>
                     <div class="at-sec-title at-sec-title-left">
                         <h2>Property <span>Features</span></h2>
                         <div class="at-heading-under-line">
                             <div class="at-heading-inside-line"></div>
                         </div>
-                        @if(isset($property['ExteriorFeatures']))
-                            <div class="property-detail">
-                                <div class="property-detail__features-header">Exterior Features</div>
-                                <div class="property-detail__features-text">
-                                    <p>{{ $property['ExteriorFeatures'] }}</p>
-                                </div>
-                            </div>
-                        @endif
-                        @if(isset($property['InteriorFeatures']))
-                            <div class="property-detail">
-                                <div class="property-detail__features-header">Interior Features</div>
-                                <div class="property-detail__features-text">
-                                    <p>{{ $property['InteriorFeatures'] }}</p>
-                                </div>
-                            </div>
-                        @endif
                     </div>
                     <div class="row at-property-features">
                         <div class="col-xs-12">
                             <div class="row no-gutters">
                                 <div class="col-md-6">
                                     <ul>
-                                        <li>Listing ID : <span class="pull-right"> {{ $property['MLSNumber'] }}</span>
+                                        <li>MLS Number : <span class="pull-right"> {{ $property['MLSNumber'] }}</span>
                                         </li>
                                         <li>Listing Style : <span class="pull-right"> {{ $property['StructuralStyle'] }}</span>
                                         </li>
@@ -101,8 +88,10 @@
                                         </li>
                                         <li>Bathrooms : <span class="pull-right">{{ $property['BathsTotal'] }}</span>
                                         </li>
-                                        <li>Garage Spaces : <span class="pull-right">{{ $property['TotalGarageSpaces'] }}</span>
-                                        </li>
+                                        @if($property['TotalGarageSpaces'] > 0)
+                                            <li>Garage Spaces : <span class="pull-right">{{ $property['TotalGarageSpaces'] }}</span>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="col-md-6">
@@ -117,13 +106,15 @@
                                         </li>
                                         <li>Zoning : <span class="pull-right">{{ $property['Zoning'] }}</span>
                                         </li>
-                                        <li>Virtual Tour :
-                                            <span class="pull-right">
-                                                <a class="btn btn-default at-btn-default" style="height: auto; padding: 2px 30px;" href="{{ $property['VirtualTourURLUnbranded'] }}" target="_blank">
-                                                    View
-                                                </a>
-                                            </span>
-                                        </li>
+                                        @if(strlen($property['VirtualTourURLUnbranded']) > 0)
+                                            <li>Virtual Tour :
+                                                <span class="pull-right">
+                                                    <a class="btn btn-default at-btn-default" style="height: auto; padding: 2px 30px;" href="{{ $property['VirtualTourURLUnbranded'] }}" target="_blank">
+                                                        View
+                                                    </a>
+                                                </span>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="col-xs-12">
@@ -131,6 +122,32 @@
                                         <li>Taxes : <span class="pull-right">${{ $property['TaxAmount'] }}</span>
                                         </li>
                                         <li>Price : <span class="pull-right">${{ $property['ListPrice'] }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="at-sec-title at-sec-title-left">
+                        <h2>Neighborhood <span>Schools</span></h2>
+                        <div class="at-heading-under-line">
+                            <div class="at-heading-inside-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="row at-property-features">
+                        <div class="col-xs-12">
+                            <div class="row no-gutters">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>Middle School : <span class="pull-right">{{ $property['MiddleOrJuniorSchool'] }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li>High School : <span class="pull-right">{{ $property['HighSchool'] }}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -171,6 +188,47 @@
                             </div>
                         </div>
                     </div> --}}
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="at-property-details-col">
+                    @if(isset($property['ExteriorFeatures']) && strlen($property['ExteriorFeatures']) > 0)
+                        <div class="at-sec-title at-sec-title-left">
+                            <h2>Exterior <span>Features</span></h2>
+                            <div class="at-heading-under-line">
+                                <div class="at-heading-inside-line"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <ul>
+                                    <li>
+                                        {{ $property['ExteriorFeatures'] }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(isset($property['InteriorFeatures']) && strlen($property['InteriorFeatures']) > 0)
+                        <div class="at-sec-title at-sec-title-left">
+                            <h2>Interior <span>Features</span></h2>
+                            <div class="at-heading-under-line">
+                                <div class="at-heading-inside-line"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <ul>
+                                    <li>
+                                        {{ $property['InteriorFeatures'] }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             {{-- <div class="col-md-4">

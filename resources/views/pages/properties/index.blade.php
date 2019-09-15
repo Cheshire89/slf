@@ -16,8 +16,11 @@
                 </div>
             @endforeach
         </div>
-
-        @include('partials.pagination')
+        <div class="row at-pagination">
+            <div class="col-xs-12 text-center">
+                {!! $properties->links() !!}
+            </div>
+        </div>
     </div>
 </section>
 <!-- Property End -->

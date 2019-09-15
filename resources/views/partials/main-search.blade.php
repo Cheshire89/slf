@@ -1,6 +1,6 @@
 <!-- Main Search start from here -->
 <section class="main-search-field">
-    <div class="container">
+    <form class="container" method="POST">
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="at-col-default-mar">
@@ -85,6 +85,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </section>
 <!-- Main Search End -->
